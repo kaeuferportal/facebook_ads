@@ -8,14 +8,12 @@ describe FacebookAds::Client do
 
   let(:response) do
     double(HTTParty::Response,
-           headers: response_headers,
+           content_type: content_type,
            body: response_body,
            code: response_status)
   end
   let(:response_status) { 200 }
-  let(:response_headers) do
-    { 'Content-Type' => 'application/json' }
-  end
+  let(:content_type) { 'application/json' }
   let(:response_body) { response_json.to_json }
   let(:response_json) { Hash.new }
 
@@ -76,10 +74,16 @@ describe FacebookAds::Client do
       is_expected.to eql response_json
     end
 
-    context 'response is not declared as JSON' do
-      before do
-        response_headers['Content-Type'] = 'text/html'
+    context 'response is declared as text/javascript' do
+      let(:content_type) { 'text/javascript' }
+
+      it 'returns a parsed JSON hash' do
+        is_expected.to eql response_json
       end
+    end
+
+    context 'response is not declared as JSON' do
+      let(:content_type) { 'text/html' }
 
       it 'raises an error' do
         expect { subject }.to raise_error(FacebookAds::UnexpectedResponseError)
@@ -143,9 +147,7 @@ describe FacebookAds::Client do
     end
 
     context 'response is not declared as JSON' do
-      before do
-        response_headers['Content-Type'] = 'text/html'
-      end
+      let(:content_type) { 'text/html' }
 
       it 'raises the expected error' do
         expect { subject }.to raise_error(expected_error_class)

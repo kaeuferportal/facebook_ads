@@ -11,6 +11,8 @@ module FacebookAds
     GRAPH_API = 'https://graph.facebook.com'
     API_VERSION = 'v2.7'
 
+    GOOD_CONTENT_TYPES = ['application/json', 'text/javascript'].freeze
+
     def initialize(access_token)
       if access_token.nil? || access_token.empty?
         raise ArgumentError, 'Please provide an access token'
@@ -61,7 +63,7 @@ module FacebookAds
     end
 
     def parse_as_json(response)
-      unless response.headers['Content-Type'] == 'application/json'
+      unless GOOD_CONTENT_TYPES.include? response.content_type
         raise UnexpectedResponseError, response
       end
 
