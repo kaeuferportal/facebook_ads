@@ -23,7 +23,7 @@ module FacebookAds
     def get(path, params: {})
       response = HTTParty.get(expand_path(path),
                               headers: http_auth_header,
-                              params: params)
+                              query: params)
       handle_response(response)
     end
 

@@ -174,10 +174,10 @@ describe FacebookAds::Client do
       let(:params) { { key: :value } }
       subject { client.get(path, params: params) }
 
-      it 'passes the params on to HTTParty' do
+      it 'passes the query params on to HTTParty' do
         expect(HTTParty)
           .to receive(:get)
-          .with(anything, hash_including(params: params))
+          .with(anything, hash_including(query: params))
           .and_return(response)
 
         subject
