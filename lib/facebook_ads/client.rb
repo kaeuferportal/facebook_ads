@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 require 'httparty'
 
-require 'facebook_ads/errors/authorization_error'
+require 'facebook_ads/errors/authentication_error'
+require 'facebook_ads/errors/client_error'
 require 'facebook_ads/errors/error'
 require 'facebook_ads/errors/unexpected_response_error'
 
@@ -24,10 +25,10 @@ module FacebookAds
       handle_response(response)
     end
 
-    def post(path)
+    def post(path, body: {})
       response = HTTParty.post(expand_path(path),
                                headers: http_auth_header,
-                               params: params)
+                               body: body)
       handle_response(response)
     end
 
@@ -48,8 +49,10 @@ module FacebookAds
 
     def validate_status(response)
       case response.code
-      when 200..299
+      when 200
         return
+      when 400
+        raise ClientError, error_message(response)
       when 401
         raise AuthenticationError, error_message(response)
       else
