@@ -32,7 +32,7 @@ module FacebookAds
       fields = Array(fields)
       validate_fields(fields)
 
-      response = client.get(id, params: { fields: fields })
+      response = client.get(id, params: { fields: fields.join(',') })
       self.fields.merge!(response)
       nil
     end
