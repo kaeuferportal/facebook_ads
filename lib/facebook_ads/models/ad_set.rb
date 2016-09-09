@@ -4,6 +4,6 @@ require 'facebook_ads/model'
 module FacebookAds
   class AdSet < FacebookAds::Model
     field :targeting
-    field :created_at
+    field :created_time
   end
 end
