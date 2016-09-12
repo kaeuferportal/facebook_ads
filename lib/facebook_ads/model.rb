@@ -1,14 +1,20 @@
 # frozen_string_literal: true
+require 'facebook_ads/json_converter'
+
 module FacebookAds
   class Model
     class << self
-      def known_fields
-        @known_fields ||= Set.new
+      def field_converters
+        @field_converters ||= {}
       end
 
-      def field(name)
+      def known_fields
+        field_converters.keys
+      end
+
+      def field(name, type: nil)
         name = name.to_s
-        known_fields << name
+        field_converters[name] = JsonConverter.for(type)
 
         define_method name do
           fields[name]
@@ -33,19 +39,28 @@ module FacebookAds
       validate_fields(fields)
 
       response = client.get(id, params: { fields: fields.join(',') })
-      self.fields.merge!(response)
+      response.each do |field, value|
+        converter = self.class.field_converters[field]
+        next if converter.nil?
+        self.fields[field] = converter.from_json(value)
+      end
       nil
     end
 
     def push
-      client.post(id, body: fields)
+      request = fields.map do |field, value|
+        converter = self.class.field_converters[field]
+        [field, converter.to_json(value)]
+      end.to_h
+
+      client.post(id, body: request)
       nil
     end
 
     private
 
     def validate_fields(fields)
-      unknown_fields = fields - self.class.known_fields.to_a
+      unknown_fields = fields - self.class.known_fields
       if unknown_fields.any?
         raise ArgumentError,
               "The following fields are unknown: #{unknown_fields}"
