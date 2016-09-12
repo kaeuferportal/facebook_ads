@@ -50,7 +50,12 @@ module FacebookAds
     def push
       request = fields.map do |field, value|
         converter = self.class.field_converters[field]
-        [field, converter.to_json(value)]
+        value = converter.to_json(value)
+
+        # HTTParty will happily convert a JSON response to a hash/array,
+        # but it will not convert those into JSON for a request.
+        value = value.to_json if value.is_a?(Hash) || value.is_a?(Array)
+        [field, value]
       end.to_h
 
       client.post(id, body: request)
