@@ -93,7 +93,7 @@ you can't:
 
 ### Edges
 
-You can't read the edges of a model. 
+You can't read the [edges](https://developers.facebook.com/docs/graph-api/overview) of a model. 
 This means there is only access to the fields that are returned by a
 `GET` request to a resource, but not to resources accessible via a
 nested URL path (like `/v2.7/123/edge_resource`).
