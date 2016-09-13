@@ -9,13 +9,24 @@ especially the [Targeting of Ads](https://developers.facebook.com/docs/marketing
 
 TBD, once we are on RubyGems.org
 
-## Usage
+## Configuration
 
 First configure your access token:
-
 ````ruby
-FacebookAds.access_token = 'your_very_secret_token'
+FacebookAds.configure do |config|
+  config.access_token = 'your_very_secret_token'
+end
 ````
+
+If you prefer to load the config from a hash, you can do that too:
+````ruby
+FacebookAds.configure do |config|
+  config_hash = YAML.load_file('my_config.yml')
+  config.load_hash(config_hash)
+end
+````
+
+## Usage
 
 Then you can instantiate an empty model, which can later selectively
 be populated with data. *Note*: It is neccessary to explicitly specify 
