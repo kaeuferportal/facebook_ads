@@ -5,7 +5,7 @@ module FacebookAds
       @config = {}
     end
 
-    def configured?
+    def valid?
       access_token && !access_token.empty?
     end
 

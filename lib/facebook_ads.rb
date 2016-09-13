@@ -21,7 +21,7 @@ module FacebookAds
     end
 
     def client
-      raise NotConfiguredError unless configuration.configured?
+      raise NotConfiguredError unless configuration.valid?
       @client ||= Client.new(configuration.access_token)
     end
 

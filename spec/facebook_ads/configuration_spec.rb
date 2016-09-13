@@ -4,19 +4,19 @@ require 'spec_helper'
 describe FacebookAds::Configuration do
   subject { described_class.new }
 
-  describe '#configured?' do
+  describe '#valid?' do
     it 'is false by default' do
-      expect(subject.configured?).to be_falsey
+      expect(subject.valid?).to be_falsey
     end
 
     it 'is true after setting an access_token' do
       subject.access_token = '123'
-      expect(subject.configured?).to be_truthy
+      expect(subject.valid?).to be_truthy
     end
 
     it 'is false after setting an empty access_token' do
       subject.access_token = ''
-      expect(subject.configured?).to be_falsey
+      expect(subject.valid?).to be_falsey
     end
   end
 
