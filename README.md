@@ -30,12 +30,12 @@ end
 
 ## Usage
 
-Then you can instantiate an empty model, which can later selectively
+Whenever you instantiate a model it will be empty. Later it can selectively
 be populated with data. *Note*: It is neccessary to explicitly specify 
 all fields that shall be retrieved.
 
 ````ruby
-adset = FacebookAds::Adset.new(123456)
+adset = FacebookAds::Adset.new(123456) # adset has no data
 adset.fetch(['targeting', 'created_time'])
 adset.created_time
 => 2016-09-09 14:50:39 +0200
@@ -70,7 +70,7 @@ in the long term (should the need arise).
 You can fetch the schema of a model using a URL like this:
 
 ````
-https://graph.facebook.com/v2.7/schema/adcampaign
+https://graph.facebook.com/v2.7/schema/adcampaign?access_token=your_access_token
 ````
 
 ## Limitations
@@ -81,7 +81,7 @@ way.
 
 ### Operations
 
-On any given model you can currently:
+On any given model you can:
 
 * **read** its fields (via the `fetch` method)
 * **update** its fields (via the `push` method)
