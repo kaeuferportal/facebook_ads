@@ -72,3 +72,28 @@ You can fetch the schema of a model using a URL like this:
 ````
 https://graph.facebook.com/v2.7/schema/adcampaign
 ````
+
+## Limitations
+
+This gem does not (yet?) offer complete bindings for the Facebook API.
+It only includes features we needed and tries to do that in an extensible
+way.
+
+### Operations
+
+On any given model you can currently:
+
+* **read** its fields (via the `fetch` method)
+* **update** its fields (via the `push` method)
+
+you can't:
+
+* **create** a new instance of the model
+* **delete** instances of the model
+
+### Edges
+
+You can't read the edges of a model. 
+This means there is only access to the fields that are returned by a
+`GET` request to a resource, but not to resources accessible via a
+nested URL path (like `/v2.7/123/edge_resource`).
