@@ -3,7 +3,10 @@ require 'spec_helper'
 
 describe FacebookAds::Client do
   let(:access_token) { 'secret_token' }
-  let(:client) { described_class.new(access_token) }
+  let(:configuration) do
+    double(FacebookAds::Configuration, valid?: true, access_token: access_token)
+  end
+  let(:client) { described_class.new(configuration) }
   let(:path) { 'test' }
 
   let(:response) do
@@ -16,10 +19,6 @@ describe FacebookAds::Client do
   let(:content_type) { 'application/json' }
   let(:response_body) { response_json.to_json }
   let(:response_json) { Hash.new }
-
-  it 'requires an access token' do
-    expect { described_class.new('') }.to raise_error(ArgumentError)
-  end
 
   shared_examples_for 'performs an authenticated request' do |method|
     it 'uses the access token as bearer token' do
@@ -204,6 +203,14 @@ describe FacebookAds::Client do
 
         subject
       end
+    end
+  end
+
+  context 'invalid configuration' do
+    let(:configuration) { double(FacebookAds::Configuration, valid?: false) }
+
+    it 'raises an error' do
+      expect { client }.to raise_error(FacebookAds::NotConfiguredError)
     end
   end
 end

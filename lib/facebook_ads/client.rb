@@ -13,11 +13,9 @@ module FacebookAds
 
     GOOD_CONTENT_TYPES = ['application/json', 'text/javascript'].freeze
 
-    def initialize(access_token)
-      if access_token.nil? || access_token.empty?
-        raise ArgumentError, 'Please provide an access token'
-      end
-      @access_token = access_token
+    def initialize(configuration)
+      raise NotConfiguredError unless configuration.valid?
+      @access_token = configuration.access_token
     end
 
     def get(path, params: {})

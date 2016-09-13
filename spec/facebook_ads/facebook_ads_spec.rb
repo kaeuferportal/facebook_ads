@@ -29,15 +29,11 @@ describe FacebookAds do
   end
 
   describe '.client' do
-    let(:access_token) { 'a secret token' }
     subject { described_class.client }
 
-    before do
-      described_class.configuration.access_token = access_token
-    end
-
-    it 'creates a client using the access token' do
-      expect(FacebookAds::Client).to receive(:new).with(access_token)
+    it 'creates a client using the configuration' do
+      expect(FacebookAds::Client)
+        .to receive(:new).with(described_class.configuration)
       subject
     end
 
@@ -52,14 +48,6 @@ describe FacebookAds do
 
       described_class.client
       described_class.client
-    end
-
-    context 'access token not configured' do
-      let(:access_token) { nil }
-
-      it 'raises an error' do
-        expect { subject }.to raise_error(FacebookAds::NotConfiguredError)
-      end
     end
   end
 end
