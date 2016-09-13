@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/kaeuferportal/facebook_ads.svg?branch=master)](https://travis-ci.org/kaeuferportal/facebook_ads)
+[![Code Climate](https://codeclimate.com/github/kaeuferportal/facebook_ads/badges/gpa.svg)](https://codeclimate.com/github/kaeuferportal/facebook_ads)
+[![Test Coverage](https://codeclimate.com/github/kaeuferportal/facebook_ads/badges/coverage.svg)](https://codeclimate.com/github/kaeuferportal/facebook_ads/coverage)
 
 # Facebook Ads
 
@@ -57,12 +59,12 @@ and adding the needed fields using the `field` DSL:
 ````ruby
 class MyModel < FacebookAds::Model
   field :name
-  field :created_time
+  field :created_time, type: :date_time
 end
 ````
 
-Since Facebook also offers the schema of its models in a machine-readable
-format, it should also be possible to automatically generate those models
+Since Facebook offers the schema of its models in a machine-readable
+format, it should be possible to automatically generate those models
 in the long term (should the need arise).
 
 You can fetch the schema of a model using a URL like this:
