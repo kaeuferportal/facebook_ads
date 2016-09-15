@@ -71,12 +71,12 @@ module FacebookAds
     end
 
     # Parses a Facebook error response and returns the error message
-    # or nil, if the message could not be parsed
     def error_message(response)
       json = parse_as_json(response)
       json.dig('error', 'message')
     rescue UnexpectedResponseError
-      nil
+      summary = "Status: #{response.code}; Body: #{response.body}"
+      "Could not parse error message. #{summary}"
     end
   end
 end
