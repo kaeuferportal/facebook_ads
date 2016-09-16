@@ -19,7 +19,7 @@ describe FacebookAds::Model do
   end
 
   describe '.field' do
-    it 'creates a round-tripping accessor' do
+    it 'creates matching accessor methods' do
       expected = 'foo'
       test_model.foo = expected
       expect(test_model.foo).to eql expected
@@ -145,9 +145,11 @@ describe FacebookAds::Model do
       subject
     end
 
-    it 'sends no fields' do
-      expect(client).to receive(:post).with(anything, body: {})
-      subject
+    context 'when no value has been set on any field' do
+      it 'sends no fields' do
+        expect(client).to receive(:post).with(anything, body: {})
+        subject
+      end
     end
 
     context 'foo set to a value' do
