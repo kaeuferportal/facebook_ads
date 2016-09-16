@@ -37,15 +37,17 @@ describe FacebookAds do
       subject
     end
 
-    it 'creates a client using the access token' do
+    it 'returns the client' do
       client = double(FacebookAds::Client)
-      expect(FacebookAds::Client).to receive(:new).and_return(client)
+      allow(FacebookAds::Client).to receive(:new).and_return(client)
       is_expected.to be client
     end
 
     it 'creates the client only once' do
       expect(FacebookAds::Client).to receive(:new).once.and_return(double)
 
+      # N.B. We can't use "subject" here, since RSpec would cache the result
+      # and thus described_class.client would only be called once.
       described_class.client
       described_class.client
     end
