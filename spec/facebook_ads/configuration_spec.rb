@@ -6,17 +6,17 @@ describe FacebookAds::Configuration do
 
   describe '#valid?' do
     it 'is false by default' do
-      expect(subject.valid?).to be_falsey
+      expect(subject.valid?).to eq false
     end
 
     it 'is true after setting an access_token' do
       subject.access_token = '123'
-      expect(subject.valid?).to be_truthy
+      expect(subject.valid?).to eq true
     end
 
     it 'is false after setting an empty access_token' do
       subject.access_token = ''
-      expect(subject.valid?).to be_falsey
+      expect(subject.valid?).to eq false
     end
   end
 

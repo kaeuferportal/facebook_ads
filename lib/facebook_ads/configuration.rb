@@ -6,7 +6,7 @@ module FacebookAds
     end
 
     def valid?
-      access_token && !access_token.empty?
+      !access_token.nil? && !access_token.empty?
     end
 
     def access_token
