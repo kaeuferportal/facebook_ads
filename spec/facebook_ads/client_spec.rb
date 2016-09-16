@@ -70,14 +70,14 @@ describe FacebookAds::Client do
     end
 
     it 'returns a parsed JSON hash' do
-      is_expected.to eql response_json
+      expect(subject).to eql response_json
     end
 
     context 'response is declared as text/javascript' do
       let(:content_type) { 'text/javascript' }
 
       it 'returns a parsed JSON hash' do
-        is_expected.to eql response_json
+        expect(subject).to eql response_json
       end
     end
 

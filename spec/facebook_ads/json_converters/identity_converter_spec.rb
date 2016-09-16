@@ -7,7 +7,7 @@ describe FacebookAds::IdentityConverter do
     subject { described_class.from_json(input) }
 
     it 'returns the input value' do
-      is_expected.to be input
+      expect(subject).to be input
     end
   end
 
@@ -16,7 +16,7 @@ describe FacebookAds::IdentityConverter do
     subject { described_class.to_json(input) }
 
     it 'returns the input value' do
-      is_expected.to be input
+      expect(subject).to be input
     end
   end
 end

@@ -9,7 +9,7 @@ describe FacebookAds::DateTimeConverter do
     subject { described_class.from_json(iso_date_time) }
 
     it 'returns the parsed date time' do
-      is_expected.to eql date_time
+      expect(subject).to eql date_time
     end
 
     context 'source format is not ISO 8601' do
@@ -25,7 +25,7 @@ describe FacebookAds::DateTimeConverter do
     subject { described_class.to_json(date_time) }
 
     it 'returns the ISO 8601 formatted date time' do
-      is_expected.to eql iso_date_time
+      expect(subject).to eql iso_date_time
     end
 
     context 'input is not a DateTime object' do

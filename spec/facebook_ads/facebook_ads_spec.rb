@@ -40,7 +40,7 @@ describe FacebookAds do
     it 'returns the client' do
       client = double(FacebookAds::Client)
       allow(FacebookAds::Client).to receive(:new).and_return(client)
-      is_expected.to be client
+      expect(subject).to be client
     end
 
     it 'creates the client only once' do
