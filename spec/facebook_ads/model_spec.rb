@@ -80,7 +80,7 @@ describe FacebookAds::Model do
             .to receive(:for).and_return(converter)
         end
 
-        it 'acquires the correct kind of converter' do
+        it 'requests the correct kind of converter' do
           expect(FacebookAds::JsonConverter)
             .to receive(:for).with(:bar).and_return(converter)
           subject
@@ -203,7 +203,7 @@ describe FacebookAds::Model do
             .to receive(:for).and_return(converter)
         end
 
-        it 'acquires the correct kind of converter' do
+        it 'requests the correct kind of converter' do
           expect(FacebookAds::JsonConverter)
             .to receive(:for).with(:bar).and_return(converter)
           subject
