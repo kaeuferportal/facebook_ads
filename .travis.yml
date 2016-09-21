@@ -1,0 +1,9 @@
+language: ruby
+script:
+  - bundle exec rspec
+  - bundle exec rubocop
+
+addons:
+  code_climate:
+    repo_token:
+      secure: "gouE7s1dMieOR4OeFTaCHiskYnUu+delPFCPxsWg+z50NE8PdxZyKfNCb7T/63KuZklbOXQjP8YG9jxJBoA1SKLL33Uit316+waRaARjsEAdC+41TNz7LDp/GJ9cf9zCBXpjhZMPhgwpN7fr4oHRzrf/5BXb4OgEIFY7szJbpyIiPrCXY1Q8BDk1svMtJhwPojegOY3oJsIDAs9zv/7bwg3EoZkznK8lfwXQBrDxbWUjXHaZlWMO/R5WsuSVL1r189obJJI7/VE/WrnF0U9c/F/L//7/lvEIvEOIftoyhHgypcAAAluwMoBBO/OH6muNPtZ+JBLWAVve3+1uP/0QxDeFdxk3otWgiF6luCeGNwP0NNGjjm12y4isncelui/VcAs5NmHlfkOsV6b2zmBglDWPLScIgc0soMAAMtp5qH2ejQuK2NTp78R0ewSfwHjsVplbYeM2wQL8BUIQGyf5YSLjy70LLVFl3Fwa7YdomKULcJAvuW0CymPbNbIofKvmRLK7KmsYCOK0CbPi1DNWbDQBGzOe1oKmvsNqX7vhxv28Z7x+X51v0viaIubQKsgIglVtBOSkauQK3rn1q9aRwKYp1n79emz5Ay6LBbYW+5PSp6N/4Ew1aoIgfRjUrGElMECXTNL9mDMoPcExKHERvcInh4wuV6+9z7W0HaPXrac="

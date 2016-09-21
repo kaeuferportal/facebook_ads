@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "A gem to communicate with Facebook's Marketing API"
   spec.homepage      = 'https://github.com/kaeuferportal/facebook_ads'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
                                         .reject { |f| f.match(%r{^spec/}) }
@@ -26,4 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'codeclimate-test-reporter'
 end
