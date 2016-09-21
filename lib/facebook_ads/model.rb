@@ -66,10 +66,8 @@ module FacebookAds
 
     def validate_fields(fields)
       unknown_fields = fields - self.class.known_fields
-      if unknown_fields.any?
-        raise ArgumentError,
-              "The following fields are unknown: #{unknown_fields}"
-      end
+      return if unknown_fields.empty?
+      raise ArgumentError, "The following fields are unknown: #{unknown_fields}"
     end
   end
 end
